@@ -138,25 +138,17 @@ print(f'Loaded {len(ds):,} verified instances.')
 "
 ```
 
-### 2. Build and Run Anvil with Google TurboQuant
+### 2. Run with Anvil CLI (`anvil`) & Persistent Profiles
 
 ```bash
-# Clone and build Anvil engine with CUDA / Metal TurboQuant
-git clone https://github.com/Solstice-Labs/anvil.git
-cd anvil
-cmake -B build -DGGML_CUDA=ON
-cmake --build build --config Release -j
+# Pull Solstice GGUF checkpoint into local Anvil registry
+anvil pull hf:Solstice-AI/Huihui-Qwen3.6-35B-A3B-Claude-4.7-Opus-abliterated-Q8_0-GGUF
 
-# Execute with Anvil: 262k context on Qwen 3.8 compressed to ~4.1 GB via TurboQuant 3-bit KV cache
-./build/bin/llama-cli \
-  -m ./models/qwen3.8-27b-q8_0.gguf \
-  -c 262144 \
-  -ctk turbo3 -ctv turbo3 \
-  -fa on \
-  -ngl 99 \
-  --model-draft ./models/qwen3.8-27b-q8_0.gguf \
-  --spec-type nextn \
-  -p "Explain the mathematical proof of TurboQuant FWHT energy dispersion."
+# Configure persistent profile (262k context compressed to ~4 GB via TurboQuant)
+anvil profile huihui-qwen set ctx=262144 type-k=turbo4 type-v=turbo3 flash-attn=true
+
+# Execute with one word using the saved profile
+anvil run huihui-qwen -p "Explain the mathematical proof of TurboQuant FWHT energy dispersion."
 ```
 
 ### 3. Apple Silicon Inference (MLX)
