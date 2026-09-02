@@ -138,17 +138,17 @@ print(f'Loaded {len(ds):,} verified instances.')
 "
 ```
 
-### 2. Run with Anvil CLI (`anvil`) & Persistent Profiles
+### 2. Run with Anvil CLI (`anvil`)
 
 ```bash
 # Pull Solstice GGUF checkpoint into local Anvil registry
 anvil pull hf:Solstice-AI/Huihui-Qwen3.6-35B-A3B-Claude-4.7-Opus-abliterated-Q8_0-GGUF
 
-# Configure persistent profile (262k context compressed to ~4 GB via TurboQuant)
-anvil profile huihui-qwen set ctx=262144 type-k=turbo4 type-v=turbo3 flash-attn=true
+# Run with 262k context compressed to ~4 GB via TurboQuant (and save flags)
+anvil run huihui-qwen --ctx 262144 --type-k turbo4 --type-v turbo3 --save
 
-# Execute with one word using the saved profile
-anvil run huihui-qwen -p "Explain the mathematical proof of TurboQuant FWHT energy dispersion."
+# Launch instantly with one word
+anvil huihui-qwen
 ```
 
 ### 3. Apple Silicon Inference (MLX)
