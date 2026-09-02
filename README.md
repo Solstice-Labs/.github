@@ -144,16 +144,18 @@ print(f'Loaded {len(ds):,} verified instances.')
 # Clone and build Anvil engine with CUDA / Metal TurboQuant
 git clone https://github.com/Solstice-Labs/anvil.git
 cd anvil
-cmake -B build -DGGML_CUDA=ON -DGGML_TURBOQUANT=ON
+cmake -B build -DGGML_CUDA=ON
 cmake --build build --config Release -j
 
-# Execute with Anvil: 262k context on Qwen 3.8 compressed to ~4 GB via TurboQuant
-./build/bin/anvil \
+# Execute with Anvil: 262k context on Qwen 3.8 compressed to ~4.1 GB via TurboQuant 3-bit KV cache
+./build/bin/llama-cli \
   -m ./models/qwen3.8-27b-q8_0.gguf \
-  --kv-turboquant 4 \
-  --speculative-nextn 2 \
   -c 262144 \
+  -ctk turbo3 -ctv turbo3 \
+  -fa on \
   -ngl 99 \
+  --model-draft ./models/qwen3.8-27b-q8_0.gguf \
+  --spec-type nextn \
   -p "Explain the mathematical proof of TurboQuant FWHT energy dispersion."
 ```
 
