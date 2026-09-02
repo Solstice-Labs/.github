@@ -17,19 +17,19 @@
 [![License](https://img.shields.io/badge/License-AGPL--3.0-blue?style=for-the-badge)](LICENSE)
 
 <p align="center">
-  <a href="#-flagship-corpora--datasets"><b>Datasets</b></a> •
-  <a href="#-inference-engines--quantization"><b>Anvil Engine</b></a> •
-  <a href="#-released-models"><b>Models</b></a> •
-  <a href="#-quickstart"><b>Quickstart</b></a> •
-  <a href="#-research-reports"><b>Papers</b></a> •
-  <a href="#-community--ecosystem"><b>Community</b></a>
+  <a href="#the-thesis"><b>The Thesis</b></a> •
+  <a href="#verified-benchmark-metrics"><b>Verified Metrics</b></a> •
+  <a href="#core-repositories--tooling"><b>Core Repositories</b></a> •
+  <a href="#released-weights--quantized-checkpoints"><b>Models</b></a> •
+  <a href="#quickstart"><b>Quickstart</b></a> •
+  <a href="#technical-reports--research"><b>Papers</b></a>
 </p>
 
 ---
 
 </div>
 
-## 🌌 The Thesis
+## The Thesis
 
 Frontier intelligence is increasingly locked behind centralized APIs and massive parameter barriers that commodity datacenters cannot sustain. 
 
@@ -39,65 +39,65 @@ Frontier intelligence is increasingly locked behind centralized APIs and massive
 
 ---
 
-## ⚡ Verified Benchmark Metrics
+## Verified Benchmark Metrics
 
 ```
-┌───────────────────────────┬──────────────────────────────────────────┬────────────────────────┐
-│ Corpus / Engine           │ Scale / Measurement                      │ Provenance / Lab       │
-├───────────────────────────┼──────────────────────────────────────────┼────────────────────────┤
-│ Project Solace 1.0 Omni   │ 12,586,893 Unique Conversations          │ 60 Sources · 7 Models  │
-│ Uncompressed Volume       │ 137.7 GB (34.3 GB compressed jsonl.gz)   │ Verified SHA256 Dedup  │
-│ Project Axiom             │ 102 GB Pure Text · 27B+ Reasoning Tokens │ 8 Frontier Labs        │
-│ Complete FABLE.5 Traces   │ 2,006,487 Deduplicated Agentic Traces    │ Parquet + JSONL        │
-│ Anvil Engine (TurboQuant) │ 4.6x KV Cache Reduction (+46.8% Speed)   │ FWHT + Gemma MTP       │
-└───────────────────────────┴──────────────────────────────────────────┴────────────────────────┘
-```
-
----
-
-## 🏛️ Ecosystem Architecture
-
-```
-                    ┌────────────────────────────────────────────────────────┐
-                    │            Frontier Multi-Teacher Ensemble             │
-                    │   GLM-5.2 • Fable 5 • GPT-5.6 Sol • DeepSeek V4 Pro    │
-                    │      Qwen 3.8-Max • Kimi K3 • Mythos 5 • Manus         │
-                    └───────────────────────────┬────────────────────────────┘
-                                                │
-                                                ▼
-                    ┌────────────────────────────────────────────────────────┐
-                    │               Automated Consensus Harness              │
-                    │  • Exact SHA256 Deduplication (Purged 3.45M copies)   │
-                    │  • Trace Inversion & Multi-Step Backtracking Checks    │
-                    │  • Weighted Round-Robin Interleaved Shuffling          │
-                    └───────────────────────────┬────────────────────────────┘
-                                                │
-                                                ▼
-                    ┌────────────────────────────────────────────────────────┐
-                    │              Project Solace 1.0 Omni (137.7 GB)        │
-                    │              12,586,893 Verified JSONL Conversations   │
-                    └───────────────────────────┬────────────────────────────┘
-                                                │
-                                                ▼
-                    ┌────────────────────────────────────────────────────────┐
-                    │             Anvil High-Throughput Engine               │
-                    │  • Google TurboQuant (FWHT O(d log d) Rotation)        │
-                    │  • Qwen 3.6 NextN Speculative Decoding (+30-50% Tok/s) │
-                    │  • Fused Metal & CUDA 4-bit / 8-bit Execution          │
-                    └────────────────────────────────────────────────────────┘
++---------------------------+------------------------------------------+------------------------+
+| Corpus / Engine           | Scale / Measurement                      | Provenance / Lab       |
++---------------------------+------------------------------------------+------------------------+
+| Project Solace 1.0 Omni   | 12,586,893 Unique Conversations          | 60 Sources · 7 Models  |
+| Uncompressed Volume       | 137.7 GB (34.3 GB compressed jsonl.gz)   | Verified SHA256 Dedup  |
+| Project Axiom             | 102 GB Pure Text · 27B+ Reasoning Tokens | 8 Frontier Labs        |
+| Complete FABLE.5 Traces   | 2,006,487 Deduplicated Agentic Traces    | Parquet + JSONL        |
+| Anvil Engine (TurboQuant) | 4.6x KV Cache Reduction (+46.8% Speed)   | FWHT + Gemma MTP       |
++---------------------------+------------------------------------------+------------------------+
 ```
 
 ---
 
-## 📦 Core Repositories & Tooling
+## Ecosystem Architecture
 
-### 🏎️ Inference & Hardware Engines
+```
+                    +--------------------------------------------------------+
+                    |            Frontier Multi-Teacher Ensemble             |
+                    |   GLM-5.2 • Fable 5 • GPT-5.6 Sol • DeepSeek V4 Pro    |
+                    |      Qwen 3.8-Max • Kimi K3 • Mythos 5 • Manus         |
+                    +---------------------------+----------------------------+
+                                                |
+                                                v
+                    +--------------------------------------------------------+
+                    |               Automated Consensus Harness              |
+                    |  • Exact SHA256 Deduplication (Purged 3.45M copies)   |
+                    |  • Trace Inversion & Multi-Step Backtracking Checks    |
+                    |  • Weighted Round-Robin Interleaved Shuffling          |
+                    +---------------------------+----------------------------+
+                                                |
+                                                v
+                    +--------------------------------------------------------+
+                    |              Project Solace 1.0 Omni (137.7 GB)        |
+                    |              12,586,893 Verified JSONL Conversations   |
+                    +---------------------------+----------------------------+
+                                                |
+                                                v
+                    +--------------------------------------------------------+
+                    |             Anvil High-Throughput Engine               |
+                    |  • Google TurboQuant (FWHT O(d log d) Rotation)        |
+                    |  • Qwen 3.6 NextN Speculative Decoding (+30-50% Tok/s) |
+                    |  • Fused Metal & CUDA 4-bit / 8-bit Execution          |
+                    +--------------------------------------------------------+
+```
+
+---
+
+## Core Repositories & Tooling
+
+### Inference & Hardware Engines
 * **[`Solstice-Labs/anvil`](https://github.com/Solstice-Labs/anvil)**  
   High-performance inference engine integrating **Google TurboQuant** (Fast Walsh-Hadamard Transform KV cache compression), Gemma 4 Multi-Token Prediction (MTP), and Qwen 3.6 NextN speculative decoding.
 * **[`Solstice-Labs/turboquant-mlx`](https://github.com/Solstice-Labs/turboquant-mlx)**  
   Fused Apple Metal kernels for TurboQuant KV cache compression on Apple Silicon Macs. 4.6x memory reduction at 98% FP16 speed.
 
-### 📚 Open Distillation Datasets (Hugging Face)
+### Open Distillation Datasets (Hugging Face)
 * **[`Solstice-AI/Solace-1.0-Omni`](https://huggingface.co/datasets/Solstice-AI/Solace-1.0-Omni)**  
   *Flagship Dataset.* 12.59M verified multi-turn conversations across 60 audited sources and 7 frontier model architectures.
 * **[`Solstice-AI/Axiom-1.0`](https://huggingface.co/datasets/Solstice-AI/Axiom-1.0-Opus4.7-Kimi2.6-GLM5.2-Deepseek4-Mythos5-Fable5-Qwen3.7)**  
@@ -107,7 +107,7 @@ Frontier intelligence is increasingly locked behind centralized APIs and massive
 
 ---
 
-## 🧠 Released Weights & Quantized Checkpoints
+## Released Weights & Quantized Checkpoints
 
 All models are published under [`Solstice-AI`](https://huggingface.co/Solstice-AI) and [`SolsticeAI`](https://huggingface.co/SolsticeAI):
 
@@ -122,7 +122,7 @@ All models are published under [`Solstice-AI`](https://huggingface.co/Solstice-A
 
 ---
 
-## 🚀 Quickstart
+## Quickstart
 
 ### 1. Download Datasets with modern `hf` CLI
 
@@ -168,7 +168,7 @@ mlx_lm.generate \
 
 ---
 
-## 📄 Technical Reports & Research
+## Technical Reports & Research
 
 * **[Project Solace: Distilling Multi-Teacher Reasoning Traces from 7 Frontier Architectures](https://solstice-ai.co/papers/solace-distillation-traces)**  
   *Gondaliya et al., Solstice Labs Technical Report, 2026.*
@@ -189,7 +189,7 @@ mlx_lm.generate \
 
 ---
 
-## 🌐 Community & Ecosystem
+## Community & Ecosystem
 
 * **Website & Docs:** [https://solstice-ai.co](https://solstice-ai.co)
 * **GitHub Organization:** [https://github.com/Solstice-Labs](https://github.com/Solstice-Labs)
