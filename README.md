@@ -147,12 +147,13 @@ cd anvil
 cmake -B build -DGGML_CUDA=ON -DGGML_TURBOQUANT=ON
 cmake --build build --config Release -j
 
-# Execute with 4-bit TurboQuant KV cache and NextN speculative decoding
-./build/bin/llama-cli \
+# Execute with Anvil: 262k context on Qwen 3.8 compressed to ~4 GB via TurboQuant
+./build/bin/anvil \
   -m ./models/qwen3.8-27b-q8_0.gguf \
   --kv-turboquant 4 \
-  --speculative-mtp 2 \
-  -c 65536 \
+  --speculative-nextn 2 \
+  -c 262144 \
+  -ngl 99 \
   -p "Explain the mathematical proof of TurboQuant FWHT energy dispersion."
 ```
 
