@@ -189,7 +189,6 @@ mlx_lm.generate \
 * **Website & Docs:** [https://solstice-ai.co](https://solstice-ai.co)
 * **GitHub Organization:** [https://github.com/Solstice-Labs](https://github.com/Solstice-Labs)
 * **Hugging Face Organization:** [https://huggingface.co/Solstice-AI](https://huggingface.co/Solstice-AI)
-* **Careers & Fellowships:** [https://solstice-ai.co/careers](https://solstice-ai.co/careers)
 
 <div align="center">
 <sub>Built with precision by Solstice Labs. Open weights, open data, open science.</sub>
