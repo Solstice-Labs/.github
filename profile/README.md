@@ -11,7 +11,7 @@
 
 ### **Distilling Frontier Intelligence into Open Silicon**
 
-[![Website](https://img.shields.io/badge/Website-solstice--ai.co-1a1a1a?style=for-the-badge&logo=cloudflare&logoColor=F38020)](https://solstice-ai.co)
+[![Website](https://img.shields.io/badge/Website-solsticeai.ml-1a1a1a?style=for-the-badge&logo=cloudflare&logoColor=F38020)](https://solsticeai.ml)
 [![Hugging Face](https://img.shields.io/badge/Hugging_Face-Solstice--AI-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/Solstice-AI)
 [![Organization](https://img.shields.io/badge/GitHub-Solstice--Labs-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Solstice-Labs)
 [![License](https://img.shields.io/badge/License-AGPL--3.0-blue?style=for-the-badge)](LICENSE)
